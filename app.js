@@ -1,8 +1,48 @@
 // Obtener la referencia del botón y del formulario
-const form = document.getElementById('form');
+const formulario = document.getElementById('formulario');
 const button = document.getElementById('submit-button');
-const box = document.getElementById('box');
+const inputs = document.querySelectorAll('#formulario input');
 
+const expresiones = {
+  usuario: /^[a-zA-Z0-9\_\-]{4,16}$/,
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+  password: /^.{4,12}$/,
+  correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  telefono: /^\d{7,14}$/
+}
+
+const validarFormulario = (e) => {
+  switch (e.target.name) {
+
+    case "usuario":
+
+      if(expresiones.usuario.test(e.target.value)){
+        
+
+      }else{
+        document.getElementById('divname').classList.add('error-message');
+      }
+
+      
+      break;
+  }
+}
+
+
+inputs.forEach((input) => {
+  input.addEventListener('keyup', validarFormulario);
+  input.addEventListener('blur', validarFormulario);
+});
+
+
+
+formulario.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+});
+
+
+/*
 // Función que se encarga de validar el formulario
 function validateForm(event) {
   event.preventDefault(); // Evita que se envíe el formulario
@@ -48,3 +88,4 @@ button.addEventListener('click', function(event) {
     box.style.backgroundColor = 'red';
   }
 });
+*/
