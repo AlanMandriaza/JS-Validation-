@@ -1,7 +1,10 @@
 // Obtener la referencia del botón y del formulario
-const formulario = document.getElementById('formulario');
-const button = document.getElementById('submit-button');
-const inputs = document.querySelectorAll('#formulario input');
+var error=document.getElementById('nombre');
+var error=document.getElementById('pasword');
+var error=document.getElementById('error');
+var form = document.getElementById('form');
+
+
 
 const expresiones = {
   usuario: /^[a-zA-Z0-9\_\-]{4,16}$/,
@@ -11,35 +14,32 @@ const expresiones = {
   telefono: /^\d{7,14}$/
 }
 
-const validarFormulario = (e) => {
-  switch (e.target.name) {
+function enviarFormulario() {
+  console.log('enviando formulario');
 
-    case "usuario":
+  var mensajesError = [];
+  var inputVal = document.getElementById('nombre').value;
+  var passwordInput = document.getElementById('password');
 
-      if(expresiones.usuario.test(e.target.value)){
-        
-
-      }else{
-        document.getElementById('divname').classList.add('error-message');
-      }
-
-      
-      break;
+  if (inputVal === null || inputVal === '') {
+    mensajesError.push('Ingresa tu nombre');
+    document.getElementById('nombre').style.backgroundColor = 'red';
+  } else {
+    document.getElementById('nombre').style.backgroundColor = '';
   }
+
+  if (passwordInput.value === null || passwordInput.value === '') {
+    mensajesError.push('Ingresa tu contraseña');
+    passwordInput.style.backgroundColor = 'red';
+  } else {
+    passwordInput.style.backgroundColor = '';
+  }
+
+  document.getElementById('error').innerHTML = mensajesError.join(', ');
+
+  return mensajesError.length === 0;
 }
 
-
-inputs.forEach((input) => {
-  input.addEventListener('keyup', validarFormulario);
-  input.addEventListener('blur', validarFormulario);
-});
-
-
-
-formulario.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-});
 
 
 /*

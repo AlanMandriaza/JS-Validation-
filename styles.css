@@ -1,45 +1,7 @@
-/* .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 110vh;
-
-
-}
-
-.alert {
-    font-weight: 400;
-}
-
-.cardbrand {
-    display: flex;
-
-}
-
-.card-footer {
-    text-align: end;
-}
-
-.master,
-.viza,
-.diners,
-.american {
-    background-color: rgb(165, 166, 167);
-    width: 42px;
-    display: inline-block;
-    
-}
-
-.text-secondary {
-    font-size: 11px;
-}
-
-*/
 
 
 
-
-.error-message {
+.error{
 	border: 3px solid #bb2929;
     opacity: 1;
 }
