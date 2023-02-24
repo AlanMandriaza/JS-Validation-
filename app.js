@@ -1,45 +1,68 @@
-// Obtener la referencia del botón y del formulario
-const formulario = document.getElementById('formulario');
-const button = document.getElementById('submit-button');
-const inputs = document.querySelectorAll('#formulario input');
-
-const expresiones = {
-  usuario: /^[a-zA-Z0-9\_\-]{4,16}$/,
-  nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
-  password: /^.{4,12}$/,
-  correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-  telefono: /^\d{7,14}$/
-}
-
-const validarFormulario = (e) => {
-  switch (e.target.name) {
-
-    case "usuario":
-
-      if(expresiones.usuario.test(e.target.value)){
-        
-
-      }else{
-        document.getElementById('divname').classList.add('error-message');
-      }
-
-      
-      break;
-  }
-}
-
-
-inputs.forEach((input) => {
-  input.addEventListener('keyup', validarFormulario);
-  input.addEventListener('blur', validarFormulario);
-});
-
-
-
-formulario.addEventListener('submit', (e) => {
+const enviarFormulario = (e) => {
   e.preventDefault();
 
+  /*variables de nombre*/
+  const inputfName = document.getElementById('fName').value;
+  const fNameInput = document.getElementById('fName');
+
+  /*variables de apellido*/
+  const inputlName = document.getElementById('lName').value;
+  const lNameInput = document.getElementById('lName');
+
+  var mensajesError = [];
+
+  if (inputfName.trim() === '' || inputlName.trim() === '') {
+    mensajesError.push('Some fields are missing');
+  }
+
+  if (inputfName.trim() === '') {
+    fNameInput.classList.add('is-invalid');
+  } else {
+    fNameInput.classList.remove('is-invalid');
+  }
+
+  if (inputlName.trim() === '') {
+    lNameInput.classList.add('is-invalid');
+  } else {
+    lNameInput.classList.remove('is-invalid');
+  }
+
+  const error = document.getElementById('error');
+  if (mensajesError.length > 0) {
+    error.innerHTML = mensajesError.join('<br>');
+    error.classList.add('alert', 'alert-danger');
+  } else {
+    error.innerHTML = '';
+    error.classList.remove('alert', 'alert-danger');
+    document.getElementById('miFormulario').submit();
+  }
+};
+
+document.getElementById('enviarBtn').addEventListener('click', (event) => {
+  event.preventDefault();
+  enviarFormulario(event);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
