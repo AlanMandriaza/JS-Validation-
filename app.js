@@ -1,62 +1,112 @@
+
+const expresiones = {
+  
+  nombre: /^[a-zA-ZÀ-ÿ\s]{1,15}$/,
+  correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+  cvc: /^[0-9]{1,3}$/,
+  card: /^[0-9]{12}$/,
+  cash: /^[0-9]{1,8}$/,
+}
+
+
+
+
+
 const enviarFormulario = (e) => {
   e.preventDefault();
 
-   /*===============================*/
+  /*===============================*/
   const inputfName = document.getElementById('fName').value;
-  const fNameInput = document.getElementById('fName');
+  const fName = document.getElementById('fName');
   const error = document.getElementById('error');
   /*===============================*/
   const inputlName = document.getElementById('lName').value;
-  const lNameInput = document.getElementById('lName');
+  const lName = document.getElementById('lName');
   /*===============================*/
-  const city = document.getElementById('city').value;
-  const inputcity = document.getElementById('city');
- /*===============================*/
- const cardNumber = document.getElementById('cardNumber').value;
-  const inputcardNumber = document.getElementById('cardNumber');
+  const inputcity = document.getElementById('city').value;
+  const city = document.getElementById('city');
+  /*===============================*/
+  const inputcardNumber = document.getElementById('cardNumber').value;
+  const cardNumber = document.getElementById('cardNumber');
+  /*===============================*/
+  const inputcvc = document.getElementById('cvc').value;
+  const cvcNumber = document.getElementById('cvc');
+   /*===============================*/
+   const inputcashAmount = document.getElementById('cashAmount').value;
+   const cashAmount = document.getElementById('cashAmount');
 
-  var mensajesError = [];
-  /*===============================*/
+
+  
+
+  var mensajesError = 0;
+
+  /*=============NOMBRE==================*/
+ 
+  if (expresiones.nombre.test(inputfName) === false) {
+    fName.classList.add('bg-custom');
+    mensajesError++;
    
+  } else {
+    fName.classList.remove('bg-custom');
+  }
+  /*=============APELLIDO==================*/
 
-   if (cardNumber.trim() === '') {
-    inputcardNumber.classList.add('is-invalid');
-    mensajesError.push('Some fields are missing');
-  } else {
-    inputcardNumber.classList.remove('is-invalid');
-  }
-  /*===============================*/
 
-  if (city.trim() === '') {
-    inputcity.classList.add('is-invalid');
-    mensajesError.push('Some fields are missing');
-  } else {
-    inputcity.classList.remove('is-invalid');
-  }
-  /*===============================*/
+  if (expresiones.nombre.test(inputlName) === false) {
 
-  if (inputfName.trim() === '') {
-    fNameInput.classList.add('is-invalid');
-    mensajesError.push('Some fields are missing');
+    lName.classList.add('bg-custom');
+    mensajesError++;
+
   } else {
-    fNameInput.classList.remove('is-invalid');
+    lName.classList.remove('bg-custom');
   }
-  /*===============================*/
-  if (inputlName.trim() === '') {
-    lNameInput.classList.add('is-invalid');
-    mensajesError.push('Some fields are missing');
+
+  /*==============cardnumber=================*/
+  if (expresiones.card.test(inputcardNumber) === false) {
+    cardNumber.classList.add('bg-custom');
+    mensajesError++;
+
   } else {
-    lNameInput.classList.remove('is-invalid');
+    cardNumber.classList.remove('bg-custom');
   }
-  /*===============================*/
-  if (mensajesError.length != 0) {
-    error.innerHTML = mensajesError.join();
+  /*=================city==============*/
+
+  if (expresiones.nombre.test(inputcity) === false) {
+    city.classList.add('bg-custom');
+    mensajesError++;
+
+  } else {
+    city.classList.remove('bg-custom');
+  }
+  /*=================cvc==============*/
+
+  if (expresiones.cvc.test(inputcvc) === false) {
+    cvcNumber.classList.add('bg-custom');
+    mensajesError++;
+  } else {
+    cvcNumber.classList.remove('bg-custom');
+  }
+  /*=================amount==============*/
+
+  if (expresiones.cash.test(inputcashAmount) === false) {
+    cashAmount.classList.add('bg-custom');
+    mensajesError++;
+  } else {
+    cashAmount.classList.remove('bg-custom');
+  }
+
+  /*==============clase=error=========*/
+
+  if (mensajesError > 0) {
+
     error.classList.add('alert', 'alert-danger');
+    error.innerHTML = 'Some fields are missing';
   } else {
-    error.innerHTML = '';
+
     error.classList.remove('alert', 'alert-danger');
     document.getElementById('miFormulario').submit();
   }
+
 };
 
 document.getElementById('enviarBtn').addEventListener('click', (event) => {
@@ -84,54 +134,3 @@ document.getElementById('enviarBtn').addEventListener('click', (event) => {
 
 
 
-
-
-
-
-/*
-// Función que se encarga de validar el formulario
-function validateForm(event) {
-  event.preventDefault(); // Evita que se envíe el formulario
-
-  // Obtener los valores de los inputs
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const message = document.getElementById('message').value.trim();
-
-  // Validar que el nombre no esté vacío
-  if (name === '') {
-    alert('El nombre no puede estar vacío');
-    return;
-  }
-
-  // Validar que el correo electrónico sea válido
-  if (!isValidEmail(email)) {
-    alert('El correo electrónico no es válido');
-    return;
-  }
-
-  // Validar que el mensaje no esté vacío
-  if (message === '') {
-    alert('El mensaje no puede estar vacío');
-    return;
-  }
-
-  // Enviar el formulario si todo está correcto
-  alert('El formulario se ha enviado correctamente');
-  form.submit();
-}
-
-// Función que se encarga de validar el formato del correo electrónico
-function isValidEmail(email) {
-  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return regex.test(email);
-}
-
-// Agregar el evento de click al botón de enviar
-button.addEventListener('click', function(event) {
-  validateForm(event);
-  if (form.checkValidity() === false) {
-    box.style.backgroundColor = 'red';
-  }
-});
-*/

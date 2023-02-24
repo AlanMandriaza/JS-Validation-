@@ -7,9 +7,7 @@
 
 }
 
-.alert {
-    font-weight: 400;
-}
+
 
 .cardbrand {
     display: flex;
@@ -32,4 +30,9 @@
 
 .text-secondary {
     font-size: 11px;
+}
+.bg-custom{
+    background:  #f8d7da;
+    border: 1px solid red;
+   
 }
