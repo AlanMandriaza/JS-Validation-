@@ -1,35 +1,56 @@
 const enviarFormulario = (e) => {
   e.preventDefault();
 
-  /*variables de nombre*/
+   /*===============================*/
   const inputfName = document.getElementById('fName').value;
   const fNameInput = document.getElementById('fName');
-
-  /*variables de apellido*/
+  const error = document.getElementById('error');
+  /*===============================*/
   const inputlName = document.getElementById('lName').value;
   const lNameInput = document.getElementById('lName');
+  /*===============================*/
+  const city = document.getElementById('city').value;
+  const inputcity = document.getElementById('city');
+ /*===============================*/
+ const cardNumber = document.getElementById('cardNumber').value;
+  const inputcardNumber = document.getElementById('cardNumber');
 
   var mensajesError = [];
+  /*===============================*/
+   
 
-  if (inputfName.trim() === '' || inputlName.trim() === '') {
+   if (cardNumber.trim() === '') {
+    inputcardNumber.classList.add('is-invalid');
     mensajesError.push('Some fields are missing');
+  } else {
+    inputcardNumber.classList.remove('is-invalid');
   }
+  /*===============================*/
+
+  if (city.trim() === '') {
+    inputcity.classList.add('is-invalid');
+    mensajesError.push('Some fields are missing');
+  } else {
+    inputcity.classList.remove('is-invalid');
+  }
+  /*===============================*/
 
   if (inputfName.trim() === '') {
     fNameInput.classList.add('is-invalid');
+    mensajesError.push('Some fields are missing');
   } else {
     fNameInput.classList.remove('is-invalid');
   }
-
+  /*===============================*/
   if (inputlName.trim() === '') {
     lNameInput.classList.add('is-invalid');
+    mensajesError.push('Some fields are missing');
   } else {
     lNameInput.classList.remove('is-invalid');
   }
-
-  const error = document.getElementById('error');
-  if (mensajesError.length > 0) {
-    error.innerHTML = mensajesError.join('<br>');
+  /*===============================*/
+  if (mensajesError.length != 0) {
+    error.innerHTML = mensajesError.join();
     error.classList.add('alert', 'alert-danger');
   } else {
     error.innerHTML = '';
@@ -42,6 +63,8 @@ document.getElementById('enviarBtn').addEventListener('click', (event) => {
   event.preventDefault();
   enviarFormulario(event);
 });
+
+
 
 
 
